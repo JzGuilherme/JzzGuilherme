@@ -1,5 +1,5 @@
 
-# 👩🏻‍💻 José Guilherme
+# 👨🏿‍💻 José Guilherme
 
 **`Desenvolvedor Estagiário`**
 
