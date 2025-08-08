@@ -1,0 +1,44 @@
+const readline = require("readline");
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+
+let saldo = 0, historico = [];
+
+function menu() {
+  console.log("1 - Entrada");
+  console.log("2 - Saída");
+  console.log("3 - Histórico");
+  console.log("4 - Saldo");
+  console.log("0 - Sair");
+  rl.question("Escolha: ", op => {
+    if (op === "1") lancar("entrada");
+    else if (op === "2") lancar("saida");
+    else if (op === "3") { 
+      historico.forEach((l, i) => 
+        console.log(`${i + 1}. ${l.tipo === "entrada" ? "+" : "-"} R$${l.valor.toFixed(2)} - ${l.descricao} (${l.data})`)
+      );
+      menu(); 
+    }
+    else if (op === "4") { console.log(`Saldo: R$${saldo.toFixed(2)}`); menu(); }
+    else if (op === "0") rl.close();
+    else { console.log("Opção inválida."); menu(); }
+  });
+}
+
+function lancar(tipo) {
+  rl.question("Descrição: ", desc => {
+    rl.question("Valor: ", val => {
+      val = parseFloat(val);
+      if (isNaN(val) || val <= 0) return console.log("Valor inválido."), menu();
+      historico.push({ tipo, descricao: desc, valor: val, data: new Date().toLocaleString("pt-BR") });
+      saldo += tipo === "entrada" ? val : -val;
+      console.log(`${tipo} registrada.`);
+      menu();
+    });
+  });
+}
+
+const conteudo = "console.log('Olá mundo');";
+const blob = new Blob([conteudo], { type: 'text/javascript' });
+saveAs(blob, "script.js"); // O arquivo será salvo como "script.js"   
+
+menu();
