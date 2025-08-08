@@ -1,3 +1,5 @@
+<script>
+
 const readline = require("readline");
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
@@ -42,3 +44,6 @@ const blob = new Blob([conteudo], { type: 'text/javascript' });
 saveAs(blob, "script.js"); // O arquivo será salvo como "script.js"   
 
 menu();
+
+</script>
+
